@@ -27,7 +27,7 @@ const ProductCard = ({
           <MDBCard className="shadow-0 border rounded-3 mt-5 mb-3">
             <MDBCardBody>
               <MDBRow>
-                <MDBCol md="12" lg="3" className="mb-4 mb-lg-0">
+                <MDBCol md="12" lg="3" className="mb-4 mb-lg-0 pos-1">
                   <MDBRipple
                     rippleColor="light"
                     rippleTag="div"
@@ -39,10 +39,13 @@ const ProductCard = ({
                       fluid
                       className="w-100"
                     />
+
                     <a href="#!">
                       <div
                         className="mask"
-                        style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
+                        style={{
+                          backgroundColor: "rgba(251, 251, 251, 0.15)",
+                        }}
                       ></div>
                     </a>
                   </MDBRipple>
@@ -72,7 +75,9 @@ const ProductCard = ({
                         ))
                       : null}
                   </div>
-                  <p className="text-truncate mb-4 mb-md-0">{prodDesc}</p>
+                  <div>
+                    <p className="text-truncate mb-4 mb-md-0">{prodDesc}</p>
+                  </div>
                 </MDBCol>
                 <MDBCol
                   md="6"
@@ -80,9 +85,9 @@ const ProductCard = ({
                   className="border-sm-start-none border-start"
                 >
                   <div className="d-flex flex-row align-items-center mb-1">
-                    <h4 className="mb-1 me-1">${prodPrice}</h4>
+                    <h4 className="mb-1 me-1">${prodPrice}</h4>&nbsp;
                     <span className="text-danger">
-                      <s>$20.99</s>
+                      {prodPrice > 55 ? <s>${prodPrice - 54}</s> : null}
                     </span>
                   </div>
                   <h6 className="text-success">Free shipping</h6>

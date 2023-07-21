@@ -4,7 +4,13 @@ import { useNavigate } from "react-router-dom";
 import NavButton from "../UI-Components/NavButton";
 import CrudTable from "../UI-Components/CrudTable";
 
-let headers = ["Batch", "Product name", "Product price", "Options"];
+let headers = [
+  "Batch",
+  "Product name",
+  "Product price",
+  "Product quantity",
+  "Options",
+];
 
 const constructTableData = (allPurchase) => {
   let tableData = {};
@@ -13,6 +19,7 @@ const constructTableData = (allPurchase) => {
       purchase.purchaseBatch,
       purchase.product.prodName,
       purchase.prodPrice,
+      purchase.prodQuantity,
     ];
   });
   return tableData;

@@ -9,6 +9,7 @@ const AddPurchase = (props) => {
   const [prodList, setProdList] = useState();
   const [prodId, setProdId] = useState(props.prodId);
   const [prodPrice, setProdPrice] = useState(props.prodPrice);
+  const [prodQuantity, setProdQuantity] = useState(props.prodQuantity);
   const [operation, setOperation] = useState("create");
   const nav = useNavigate();
   const loc = useLocation();
@@ -21,6 +22,7 @@ const AddPurchase = (props) => {
         .then((resp) => {
           setProdId(resp.data.purchase.product.prodId);
           setProdPrice(resp.data.purchase.prodPrice);
+          setProdQuantity(resp.data.purchase.prodQuantity);
           axios.get("http://localhost:8081/api/product").then((resp) => {
             setProdList(resp.data.allProducts);
           });
@@ -38,6 +40,7 @@ const AddPurchase = (props) => {
       prodId: prodId,
       prodPrice: prodPrice,
       operation: operation,
+      prodQuantity: prodQuantity,
     };
     if (operation === "create") {
       axios.post("http://localhost:8081/api/purchase", data).then((resp) => {
@@ -66,6 +69,7 @@ const AddPurchase = (props) => {
       <div>
         <Container fixed maxWidth="sm" class="center">
           <h3>Create purchase</h3>&nbsp;
+          <br />
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
@@ -78,12 +82,22 @@ const AddPurchase = (props) => {
             ))}
           </Select>
           <br />
+          <br />
           <TextField
             id="standard-basic"
             label="Product price"
             variant="standard"
             onChange={(e) => setProdPrice(e.target.value)}
             value={prodPrice}
+          />
+          <br />
+          <br />
+          <TextField
+            id="standard-basic"
+            label="Product quantity"
+            variant="standard"
+            onChange={(e) => setProdQuantity(e.target.value)}
+            value={prodQuantity}
           />
           <br />
           <br />

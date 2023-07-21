@@ -87,6 +87,7 @@ const AddProduct = (props) => {
           id="standard-basic"
           label="Product name"
           variant="standard"
+          style={{ width: "100%" }}
           onChange={(e) => setProdName(e.target.value)}
           value={prodName}
         />
@@ -110,7 +111,6 @@ const AddProduct = (props) => {
         <br />
         <br />
         <input type="file" onChange={handleImageChange} />
-        <img src={prodImage} alt="image" />
         <br />
         <br />
         <br />

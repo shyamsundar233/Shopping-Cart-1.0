@@ -1,3 +1,19 @@
 body {
-    background-color: #eee;
-  }
+  background-color: #eee;
+}
+
+.w-100{
+  min-height: 200px;
+  max-height: 200px;
+  min-width: 150px;
+}
+
+.text-truncate{
+  white-space: inherit !important;
+}
+
+.pos-1{
+  margin: auto !important;
+  width: 180px !important;
+  overflow: hidden !important;
+}

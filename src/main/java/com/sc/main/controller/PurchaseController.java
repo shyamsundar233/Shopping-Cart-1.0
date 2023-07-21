@@ -48,15 +48,16 @@ public class PurchaseController {
 		JSONObject response = new JSONObject();
 		int prodId = Integer.parseInt(payLoad.get("prodId").toString());
 		int prodPrice = Integer.parseInt(payLoad.get("prodPrice").toString());
+		int prodQuantity = Integer.parseInt(payLoad.get("prodQuantity").toString());
 		Product product = productService.getProductById(prodId);
 		String operation = payLoad.get("operation").toString();
 		Purchase purchase;
 		if (operation.equals("create")) {
-			purchase = new Purchase(purchaseService.getLastBatchNumber() + 1, product, prodPrice);
+			purchase = new Purchase(purchaseService.getLastBatchNumber() + 1, product, prodPrice, prodQuantity);
 		} else {
 			int purchaseId = Integer.parseInt(payLoad.get("purchaseId").toString());
 			Purchase existPurchase = purchaseService.getPurchaseById(purchaseId);
-			purchase = new Purchase(purchaseId, existPurchase.getPurchaseBatch(), product, prodPrice);
+			purchase = new Purchase(purchaseId, existPurchase.getPurchaseBatch(), product, prodPrice, prodQuantity);
 		}
 		response.put("SUCCESS", purchaseService.savePurchase(purchase));
 		return response;
