@@ -2,6 +2,7 @@ package com.sc.main.entity;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class Product {
 	private String prodName;
 	private List<String> prodTags;
 	private String prodDesc;
+	@Column(length = 65535)
 	private String prodImage;
 
 	public int getProdId() {

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ProductCard from "../UI-Components/ProductCard";
+import NavButton from "../UI-Components/NavButton";
 
 const ViewProduct = (props) => {
   const [prodList, setProdList] = useState(props.prodList);
@@ -9,7 +10,7 @@ const ViewProduct = (props) => {
       setProdList(resp.data);
     });
   }, []);
-  if (prodList) {
+  if (prodList && prodList.length > 0) {
     return (
       <div>
         {prodList.map((prod, index) => (
@@ -22,6 +23,15 @@ const ViewProduct = (props) => {
             prodImage={prod.prodImage}
           ></ProductCard>
         ))}
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        No items found
+        <br />
+        <br />
+        <NavButton label="Admin" path="/admin" variant="outlined" />
       </div>
     );
   }
