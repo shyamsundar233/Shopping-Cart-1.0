@@ -82,7 +82,7 @@ const AddProduct = (props) => {
   return (
     <div>
       <Container fixed maxWidth="sm" class="center">
-        <h3>Create product</h3>&nbsp;
+        <h3>Create product </h3>&nbsp;
         <TextField
           id="standard-basic"
           label="Product name"
