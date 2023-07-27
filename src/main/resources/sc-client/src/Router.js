@@ -6,25 +6,24 @@ import ListProduct from "./Components/ListProduct";
 import AddPurchase from "./Components/AddPurchase";
 import ListPurchase from "./Components/ListPurchase";
 import Test from "./Components/Test";
+import Admin from "./Components/Admin";
 
 const Router = () => {
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />}></Route>
-        </Routes>
-        <Routes>
-          <Route path="admin">
-            <Route index element={<ListProduct />} />
-            <Route path="create" element={<AddProduct />} />
-            <Route path="createPurchase" element={<AddPurchase />} />
-            <Route path="listPurchase" element={<ListPurchase />} />
-          </Route>
-          <Route path="test" element={<Test />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}></Route>
+      </Routes>
+      <Routes>
+        <Route path="admin" element={<Admin />}>
+          <Route index element={<ListProduct />} />
+          <Route path="create" element={<AddProduct />} />
+          <Route path="createPurchase" element={<AddPurchase />} />
+          <Route path="listPurchase" element={<ListPurchase />} />
+        </Route>
+        <Route path="test" element={<Test />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
