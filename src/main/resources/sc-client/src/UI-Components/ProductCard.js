@@ -19,6 +19,7 @@ const ProductCard = ({
   prodTags,
   prodPrice,
   prodImage,
+  handleProdQty,
 }) => {
   return (
     <MDBContainer fluid>
@@ -92,7 +93,11 @@ const ProductCard = ({
                   </div>
                   <h6 className="text-success">Free shipping</h6>
                   <div className="d-flex flex-column mt-4">
-                    <MDBBtn color="primary" size="sm">
+                    <MDBBtn
+                      color="primary"
+                      size="sm"
+                      onClick={() => handleProdQty(prodId)}
+                    >
                       Buy now
                     </MDBBtn>
                     <MDBBtn outline color="primary" size="sm" className="mt-2">

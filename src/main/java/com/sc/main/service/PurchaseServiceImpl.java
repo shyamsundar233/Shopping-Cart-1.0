@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sc.main.dao.PurchaseDao;
+import com.sc.main.entity.Product;
 import com.sc.main.entity.Purchase;
 
 @Service
@@ -38,6 +39,11 @@ public class PurchaseServiceImpl implements PurchaseService {
 	@Override
 	public int getLastBatchNumber() {
 		return purchaseDao.getLastBatchNumber();
+	}
+
+	@Override
+	public Purchase getPurchaseForProduct(Product product) {
+		return purchaseDao.getPurchaseForProduct(product);
 	}
 
 }

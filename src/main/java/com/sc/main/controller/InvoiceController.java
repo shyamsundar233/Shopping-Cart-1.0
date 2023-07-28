@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sc.main.POJO.Sales;
 import com.sc.main.entity.Invoice;
 import com.sc.main.entity.InvoiceItem;
+import com.sc.main.entity.Product;
+import com.sc.main.entity.Purchase;
 import com.sc.main.service.InvoiceItemService;
 import com.sc.main.service.InvoiceService;
+import com.sc.main.service.ProductService;
+import com.sc.main.service.PurchaseService;
 
 @RestController
 @RequestMapping("/api")
@@ -30,6 +34,12 @@ public class InvoiceController {
 
     @Autowired
     private InvoiceItemService invoiceItemService;
+
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private PurchaseService purchaseService;
 
     @GetMapping("/invoice")
     public JSONObject getAllInvoices() {
@@ -46,7 +56,7 @@ public class InvoiceController {
     }
 
     @PostMapping("/invoice")
-    public JSONObject saveInvoice(@RequestBody Invoice invoice){
+    public JSONObject saveInvoice(@RequestBody Invoice invoice) {
         JSONObject response = new JSONObject();
         response.put("SUCCESS", invoiceService.saveInvoice(invoice));
         return response;
@@ -60,6 +70,7 @@ public class InvoiceController {
         List<InvoiceItem> invoiceItems = sales.getInvoiceItem();
         Invoice lastInvoice = invoiceService.getLastInvoice();
         for (InvoiceItem invoiceItem : invoiceItems) {
+            updateProdQty(invoiceItem.getProdId(), invoiceItem.getProdQuantity());
             invoiceItem.setInvoice(lastInvoice);
             invoiceItemService.saveInvoiceItem(invoiceItem);
         }
@@ -72,6 +83,14 @@ public class InvoiceController {
         JSONObject response = new JSONObject();
         response.put("SUCCESS", invoiceService.deleteInvoice(id));
         return response;
+    }
+
+    public void updateProdQty(int prodId, int prodQty) {
+        Product product = productService.getProductById(prodId);
+        Purchase purchase = purchaseService.getPurchaseForProduct(product);
+        int updateProdQty = purchase.getProdQuantity() - prodQty;
+        purchase.setProdQuantity(updateProdQty);
+        purchaseService.savePurchase(purchase);
     }
 
 }

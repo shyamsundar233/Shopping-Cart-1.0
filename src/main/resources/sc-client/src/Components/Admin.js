@@ -6,9 +6,7 @@ import NavButton from "../UI-Components/NavButton";
 const Admin = () => {
   return (
     <div>
-      <div style={{ position: "absolute", top: "10px", minWidth: "100%" }}>
-        <Outlet />
-      </div>
+      <Outlet />
       <NavButton
         label="Log out"
         path="/"

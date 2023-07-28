@@ -57,7 +57,7 @@ const ListProduct = () => {
     return <div>No products</div>;
   } else {
     return (
-      <div>
+      <div style={{ position: "absolute", top: "10px", minWidth: "100%" }}>
         <h2>Product List</h2>
         <NavButton
           label="Create product"

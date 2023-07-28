@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sc.main.entity.Product;
 import com.sc.main.entity.Purchase;
 import com.sc.main.repo.PurchaseRepo;
 
@@ -52,6 +53,11 @@ public class PurchaseDaoImpl implements PurchaseDao {
 		} else {
 			return 0;
 		}
+	}
+
+	@Override
+	public Purchase getPurchaseForProduct(Product product) {
+		return purchaseRepo.findFirstByProdIdAndQtyGreaterThanZero(product);
 	}
 
 }

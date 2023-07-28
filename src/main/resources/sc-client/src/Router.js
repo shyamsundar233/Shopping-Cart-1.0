@@ -7,6 +7,8 @@ import AddPurchase from "./Components/AddPurchase";
 import ListPurchase from "./Components/ListPurchase";
 import Test from "./Components/Test";
 import Admin from "./Components/Admin";
+import BuyNow from "./Components/BuyNow";
+import PurchaseSuccess from "./Components/PurchaseSuccess";
 
 const Router = () => {
   return (
@@ -21,7 +23,8 @@ const Router = () => {
           <Route path="createPurchase" element={<AddPurchase />} />
           <Route path="listPurchase" element={<ListPurchase />} />
         </Route>
-        <Route path="test" element={<Test />} />
+        <Route path="buyNow" element={<BuyNow />} />
+        <Route path="invoice/success" element={<PurchaseSuccess />} />
       </Routes>
     </BrowserRouter>
   );

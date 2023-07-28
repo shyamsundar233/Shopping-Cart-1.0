@@ -3,6 +3,7 @@ package com.sc.main.service;
 
 import java.util.List;
 
+import com.sc.main.entity.Product;
 import com.sc.main.entity.Purchase;
 
 public interface PurchaseService {
@@ -15,4 +16,6 @@ public interface PurchaseService {
 	public String deletePurchase(int id);
 
 	public int getLastBatchNumber();
+
+	public Purchase getPurchaseForProduct(Product product);
 }

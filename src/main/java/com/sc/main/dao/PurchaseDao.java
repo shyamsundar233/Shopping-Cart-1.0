@@ -3,6 +3,7 @@ package com.sc.main.dao;
 
 import java.util.List;
 
+import com.sc.main.entity.Product;
 import com.sc.main.entity.Purchase;
 
 public interface PurchaseDao {
@@ -15,4 +16,6 @@ public interface PurchaseDao {
 	public String deletePurchase(int id);
 
 	public int getLastBatchNumber();
+
+	public Purchase getPurchaseForProduct(Product product);
 }
