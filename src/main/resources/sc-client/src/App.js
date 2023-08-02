@@ -6,6 +6,8 @@ const App = () => {
   return (
     <div>
       <Title></Title>
+      <br />
+      <br />
       <ViewProduct></ViewProduct>
     </div>
   );

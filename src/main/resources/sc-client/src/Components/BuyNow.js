@@ -49,6 +49,9 @@ const BuyNow = () => {
   const [openAddress, setOpenAddress] = useState(false);
   const [openPayment, setOpenPayment] = useState(false);
   const [orderTotal, setOrderTotal] = useState(0);
+  const [alertType, setAlertType] = useState("success");
+  const [alertMessage, setAlertMessage] = useState("");
+  const [openAlert, setOpenAlert] = useState("none");
   const loc = useLocation();
   const nav = useNavigate();
   useEffect(() => {
@@ -68,6 +71,7 @@ const BuyNow = () => {
     });
   }, [prodList]);
   const handleConfirmItems = () => {
+    showCustomAlert("success", "Test");
     setOpenItems(false);
     setOpenAddress(true);
   };
@@ -109,11 +113,34 @@ const BuyNow = () => {
       nav("/invoice/success");
     });
   };
+  const showCustomAlert = (type, message) => {
+    setAlertType(type);
+    setAlertMessage(message);
+    setOpenAlert("flex");
+    document
+      .getElementById("customAlertBuyNow")
+      .setAttribute("display", "flex");
+    setTimeout(() => {
+      document
+        .getElementById("customAlertBuyNow")
+        .setAttribute("display", "none");
+    }, 3000);
+  };
   if (prodList && prodList.length > 0) {
     return (
       <div>
-        <Alert variant="filled" severity="success">
-          This is a success alert — check it out!
+        <Alert
+          variant="filled"
+          severity={alertType}
+          sx={{
+            marginTop: "80px",
+            width: "50%",
+            position: "absolute",
+            left: "25%",
+          }}
+          id="customAlertBuyNow"
+        >
+          {alertMessage}
         </Alert>
         <div className="h-div">
           <h3 className="h3-title">Checkout</h3>
