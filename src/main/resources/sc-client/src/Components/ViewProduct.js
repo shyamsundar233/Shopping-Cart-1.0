@@ -33,7 +33,9 @@ const ViewProduct = (props) => {
   const nav = useNavigate();
   useEffect(() => {
     axios.get("http://localhost:8081/api/items").then((resp) => {
-      setProdList(resp.data);
+        if(typeof resp.data !== 'string'){
+            setProdList(resp.data);
+        }
     });
   }, []);
   const handleProdQty = (prodId) => {

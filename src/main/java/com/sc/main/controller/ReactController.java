@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ReactController {
 	
-	@RequestMapping(value = { "/", "/{path:[^\\.]*}" })
+	@RequestMapping(value = { "/", "/((?!login$){path:[^\\.]*})" })
     public String index() {
         return "forward:/index.html";
     }
