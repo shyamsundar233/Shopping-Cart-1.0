@@ -9,6 +9,7 @@ import Test from "./Components/Test";
 import Admin from "./Components/Admin";
 import BuyNow from "./Components/BuyNow";
 import PurchaseSuccess from "./Components/PurchaseSuccess";
+import LoginComponent from "./Components/LoginComponent";
 
 const Router = () => {
   return (
@@ -25,6 +26,7 @@ const Router = () => {
         </Route>
         <Route path="buyNow" element={<BuyNow />} />
         <Route path="invoice/success" element={<PurchaseSuccess />} />
+        <Route path="loginPage" element={<LoginComponent />} />
       </Routes>
     </BrowserRouter>
   );
