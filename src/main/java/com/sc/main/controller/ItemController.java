@@ -1,7 +1,13 @@
 package com.sc.main.controller;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import com.sc.main.POJO.RecentItems;
+import com.sc.main.utils.ItemsUtil;
+import com.sc.main.utils.RecentItemsUtil;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +49,12 @@ public class ItemController {
                 allItemJson.add(item);
             }
         }
+        Set<Integer> prodIds = new HashSet<Integer>();
+        prodIds.add(1);
+        prodIds.add(2);
+        prodIds.add(3);
+        prodIds.add(10);
+        RecentItemsUtil.addRecentItemsToSerialize(prodIds);
         return allItemJson;
     }
 
@@ -54,6 +66,16 @@ public class ItemController {
         Item item = new Item(product.getProdId(), product.getProdName(), product.getProdDesc(), product.getProdTags(),
                 product.getProdImage(), purchase.getProdPrice(), purchase.getProdQuantity());
         response.put("item", item);
+        return response;
+    }
+
+    @GetMapping("/recentItems")
+    public JSONArray recentItems(){
+        JSONArray response = new JSONArray();
+        Set<Integer> prodIds = RecentItemsUtil.getRecentItemsToSerialize();
+        for(int prodId : prodIds){
+            response.add(getItemByProdId(prodId).get("item"));
+        }
         return response;
     }
 

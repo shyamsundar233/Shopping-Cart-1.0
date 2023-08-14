@@ -10,32 +10,38 @@ import {
   MDBRipple,
   MDBBtn,
 } from "mdb-react-ui-kit";
-import "./ProductCard.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import "./ProductBox.css";
 
-const ProductCard = ({
-  prodId,
-  prodName,
-  prodDesc,
-  prodTags,
-  prodPrice,
-  prodImage,
-  handleProdQty,
-}) => {
+const ProductBox = ({ prodId, prodName, prodPrice, prodImage }) => {
+  const nav = useNavigate();
+  const redirectToDetail = () => {
+    nav("/detail/" + prodId);
+  };
   return (
-    <MDBContainer fluid style={{ width: "100%", padding: "2px" }}>
+    <MDBContainer
+      fluid
+      style={{
+        width: "300px",
+        height: "300px",
+        padding: "2px",
+        margin: "0px",
+        overflow: "hidden",
+      }}
+    >
       <MDBRow className="justify-content-center mb-0">
         <MDBCol md="12" xl="10">
           <MDBCard
-            className="shadow-0 border-cust-1"
+            className="border-cust-1"
             style={{
               backgroundColor: "white",
               color: "black",
+              height: "296px",
             }}
           >
-            <MDBCardBody className="prod-card-1">
+            <MDBCardBody>
               <MDBRow>
-                <MDBCol md="12" lg="3" className="mb-4 mb-lg-0 pos-1">
+                <MDBCol md="12" lg="3" className="mb-4 mb-lg-0 pos-1-detail">
                   <MDBRipple
                     rippleColor="light"
                     rippleTag="div"
@@ -45,7 +51,7 @@ const ProductCard = ({
                       src={prodImage}
                       alt="Image"
                       fluid
-                      className="w-100"
+                      className="w-100-prod-box"
                     />
 
                     <a href="#!">
@@ -58,9 +64,9 @@ const ProductCard = ({
                     </a>
                   </MDBRipple>
                 </MDBCol>
-                <MDBCol md="6">
+                <MDBCol md="6" style={{ width: "100%" }}>
                   <Link to={`/detail/${prodId}`}>
-                    <h5>{prodName}</h5>
+                    <b>{prodName}</b>
                   </Link>
                   <div className="d-flex flex-row">
                     <div className="text-danger mb-1 me-2">
@@ -71,48 +77,29 @@ const ProductCard = ({
                     </div>
                     <span>310</span>
                   </div>
-                  <div className="mt-1 mb-0 text-muted small">
-                    {prodTags
-                      ? prodTags.map((tag, index) => (
-                          <span>
-                            <span style={{ color: "black" }}>{tag}</span>
-                            {index !== prodTags.length - 1 &&
-                            (index + 1) % 5 !== 0 ? (
-                              <span
-                                className="text-primary"
-                                style={{ color: "black" }}
-                              >
-                                {" "}
-                                •{" "}
-                              </span>
-                            ) : null}
-                            {(index + 1) % 5 === 0 ? <br /> : null}
-                          </span>
-                        ))
-                      : null}
-                  </div>
-                  <div>
-                    <p className="text-truncate mb-4 mb-md-0">{prodDesc}</p>
-                  </div>
                 </MDBCol>
-                <MDBCol
-                  md="6"
-                  lg="3"
-                  className="border-sm-start-none border-start"
-                >
+                <br />
+                <br />
+                <MDBCol md="6" lg="3">
                   <div className="d-flex flex-row align-items-center mb-1">
-                    <h4 className="mb-1 me-1">${prodPrice}</h4>&nbsp;
-                    <span className="text-danger">
+                    <h4 className="mb-1 me-1 prod-price-box-1">${prodPrice}</h4>
+                    &nbsp;
+                    <span className="text-danger prod-price-strike-box-1">
                       {prodPrice > 55 ? <s>${prodPrice - 54}</s> : null}
                     </span>
                   </div>
-                  <h6 className="text-success-cust-1">Free shipping</h6>
-                  <div className="d-flex flex-column mt-4">
+                  <div className="d-flex flex-column">
                     <MDBBtn
                       color="primary"
                       size="sm"
-                      onClick={() => handleProdQty(prodId)}
-                      style={{ backgroundColor: "#512B81" }}
+                      onClick={() => redirectToDetail()}
+                      style={{
+                        backgroundColor: "#512B81",
+                        width: "95px",
+                        position: "absolute",
+                        top: "228px",
+                        left: "30px",
+                      }}
                     >
                       Buy now
                     </MDBBtn>
@@ -121,9 +108,16 @@ const ProductCard = ({
                       color="primary"
                       size="sm"
                       className="mt-2"
-                      style={{ color: "#512B81", borderColor: "#512B81" }}
+                      style={{
+                        color: "#512B81",
+                        borderColor: "#512B81",
+                        width: "95px",
+                        position: "absolute",
+                        top: "220px",
+                        right: "33px",
+                      }}
                     >
-                      Add to wish list
+                      Wish list
                     </MDBBtn>
                   </div>
                 </MDBCol>
@@ -136,4 +130,4 @@ const ProductCard = ({
   );
 };
 
-export default ProductCard;
+export default ProductBox;

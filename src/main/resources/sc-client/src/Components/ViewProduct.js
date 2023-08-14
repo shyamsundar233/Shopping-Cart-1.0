@@ -4,6 +4,7 @@ import ProductCard from "../UI-Components/ProductCard";
 import NavButton from "../UI-Components/NavButton";
 import { useNavigate } from "react-router-dom";
 import { Modal, Backdrop, Fade, Box, Typography, Button } from "@mui/material";
+import "./ViewProduct.css";
 
 const prodListJson = (prodId, prodQty, prodList) => {
   let prodRecord = prodList.find((prod) => prod.prodId === prodId);
@@ -12,17 +13,18 @@ const prodListJson = (prodId, prodQty, prodList) => {
   arr.push(prodRecord);
   return arr;
 };
-
 const style = {
   position: "absolute",
-  top: "50%",
+  top: "100px",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
+  width: "80%",
+  bgcolor: "white",
+  border: "none",
+  borderRadius: "5px",
   boxShadow: 24,
   p: 4,
+  width: "500px",
 };
 
 let quantityList = [];
@@ -33,9 +35,9 @@ const ViewProduct = (props) => {
   const nav = useNavigate();
   useEffect(() => {
     axios.get("http://localhost:8081/api/items").then((resp) => {
-        if(typeof resp.data !== 'string'){
-            setProdList(resp.data);
-        }
+      if (typeof resp.data !== "string") {
+        setProdList(resp.data);
+      }
     });
   }, []);
   const handleProdQty = (prodId) => {
@@ -63,18 +65,27 @@ const ViewProduct = (props) => {
   };
   if (prodList && prodList.length > 0) {
     return (
-      <div>
-        {prodList.map((prod, index) => (
-          <ProductCard
-            prodId={prod.prodId}
-            prodName={prod.prodName}
-            prodPrice={prod.prodPrice}
-            prodDesc={prod.prodDesc}
-            prodTags={prod.prodTags}
-            prodImage={prod.prodImage}
-            handleProdQty={handleProdQty}
-          ></ProductCard>
-        ))}
+      <div
+        style={{
+          float: "right",
+          width: "80%",
+          backgroundColor: "#D8D9DA",
+          padding: "10px",
+        }}
+      >
+        <div>
+          {prodList.map((prod, index) => (
+            <ProductCard
+              prodId={prod.prodId}
+              prodName={prod.prodName}
+              prodPrice={prod.prodPrice}
+              prodDesc={prod.prodDesc}
+              prodTags={prod.prodTags}
+              prodImage={prod.prodImage}
+              handleProdQty={handleProdQty}
+            ></ProductCard>
+          ))}
+        </div>
         <div>
           <Modal
             aria-labelledby="transition-modal-title"

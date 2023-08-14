@@ -17,3 +17,19 @@ body {
   width: 180px !important;
   overflow: hidden !important;
 }
+
+.text-success-cust-1{
+  color: #35155D !important;
+}
+
+.col-xl-10{
+  width: 100% !important;  
+}
+
+.border-cust-1{
+  border-radius: unset !important;
+}
+
+.prod-card-1:hover{
+  box-shadow: #512B81 7px 7px 29px 7px;
+}

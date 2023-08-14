@@ -10,12 +10,17 @@ import Admin from "./Components/Admin";
 import BuyNow from "./Components/BuyNow";
 import PurchaseSuccess from "./Components/PurchaseSuccess";
 import LoginComponent from "./Components/LoginComponent";
+import ItemDetailView from "./Components/ItemDetailView";
+import Home from "./Components/Home";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />}></Route>
+        <Route path="/" element={<App />}>
+          <Route index element={<Home />} />
+          <Route path="detail/:itemId" element={<ItemDetailView />} />
+        </Route>
       </Routes>
       <Routes>
         <Route path="admin" element={<Admin />}>

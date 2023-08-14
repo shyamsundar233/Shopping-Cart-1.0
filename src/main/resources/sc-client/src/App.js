@@ -1,14 +1,16 @@
 import React from "react";
-import ViewProduct from "./Components/ViewProduct";
+import { Outlet } from "react-router-dom";
 import Title from "./Components/Title";
+import "./App.css";
 
 const App = () => {
   return (
-    <div>
-      <Title></Title>
-      <br />
-      <br />
-      <ViewProduct></ViewProduct>
+    <div style={{ backgroundColor: "white" }}>
+      <Title />
+
+      <div className="outler-app">
+        <Outlet />
+      </div>
     </div>
   );
 };

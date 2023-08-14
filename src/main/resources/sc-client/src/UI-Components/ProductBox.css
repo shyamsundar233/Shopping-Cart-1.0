@@ -1,0 +1,47 @@
+body {
+  background-color: #eee;
+}
+
+.w-100-prod-box {
+  min-height: 120px;
+  max-height: 120px;
+  min-width: 120px;
+}
+
+.text-truncate {
+  white-space: inherit !important;
+}
+
+.pos-1-detail {
+  margin-left: 0px !important;
+  width: 180px !important;
+  overflow: hidden !important;
+}
+
+.text-success-cust-1 {
+  color: #35155d !important;
+}
+
+.col-xl-10 {
+  width: 100% !important;
+}
+
+.border-cust-1 {
+  border-radius: unset !important;
+}
+
+/* .prod-card-1:hover {
+  box-shadow: #512b81 7px 7px 29px 7px;
+} */
+
+.prod-price-strike-box-1 {
+  position: absolute;
+  top: 55px;
+  right: 79px;
+}
+
+.prod-price-box-1 {
+  position: absolute;
+  top: 30px;
+  right: 55px;
+}
