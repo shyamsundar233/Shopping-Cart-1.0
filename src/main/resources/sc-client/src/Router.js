@@ -12,6 +12,7 @@ import PurchaseSuccess from "./Components/PurchaseSuccess";
 import LoginComponent from "./Components/LoginComponent";
 import ItemDetailView from "./Components/ItemDetailView";
 import Home from "./Components/Home";
+import Orders from "./Components/Orders";
 
 const Router = () => {
   return (
@@ -20,6 +21,7 @@ const Router = () => {
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
           <Route path="detail/:itemId" element={<ItemDetailView />} />
+          <Route path="orders" element={<Orders />} />
         </Route>
       </Routes>
       <Routes>

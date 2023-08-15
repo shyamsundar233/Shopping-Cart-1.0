@@ -1,11 +1,6 @@
 package com.sc.main.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 @Entity
 public class InvoiceItem {
@@ -16,7 +11,7 @@ public class InvoiceItem {
     private int prodQuantity;
     private int prodPrice;
     private int prodAmount;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "invoiceId", referencedColumnName = "invoiceId")
     private Invoice invoice;
 
@@ -62,8 +57,13 @@ public class InvoiceItem {
 
     @Override
     public String toString() {
-        return "InvoiceItem [prodId=" + prodId + ", prodQuantity=" + prodQuantity + ", prodPrice=" + prodPrice
-                + ", prodAmount=" + prodAmount + ", invoice=" + invoice + "]";
+        return "InvoiceItem{" +
+                "invPrdId=" + invPrdId +
+                ", prodId=" + prodId +
+                ", prodQuantity=" + prodQuantity +
+                ", prodPrice=" + prodPrice +
+                ", prodAmount=" + prodAmount +
+                '}';
     }
 
     public int getInvPrdId() {

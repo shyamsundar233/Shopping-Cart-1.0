@@ -3,18 +3,8 @@ package com.sc.main.entity;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 
 @Entity
 public class Invoice {
@@ -31,8 +21,9 @@ public class Invoice {
     @ManyToOne
     @JoinColumn(name = "buyerId", referencedColumnName = "buyerId")
     private Buyer buyer;
-    @OneToMany(mappedBy = "invoice")
-    private List<InvoiceItem> invoiceItems;
+     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
+     @JsonIgnoreProperties("invoice")
+     private List<InvoiceItem> invoiceItems;
     private int invoiceTotal;
 
     public int getInvoiceId() {
@@ -67,13 +58,13 @@ public class Invoice {
         this.buyer = buyer;
     }
 
-    public List<InvoiceItem> getInvoiceItems() {
-        return invoiceItems;
-    }
+     public List<InvoiceItem> getInvoiceItems() {
+         return invoiceItems;
+     }
 
-    public void setInvoiceItems(List<InvoiceItem> invoiceItems) {
-        this.invoiceItems = invoiceItems;
-    }
+     public void setInvoiceItems(List<InvoiceItem> invoiceItems) {
+         this.invoiceItems = invoiceItems;
+     }
 
     public int getInvoiceTotal() {
         return invoiceTotal;
@@ -85,8 +76,14 @@ public class Invoice {
 
     @Override
     public String toString() {
-        return "Invoice [invoiceId=" + invoiceId + ", createdTime=" + createdTime + ", modifiedTime=" + modifiedTime
-                + ", buyer=" + buyer + ", invoiceItems=" + invoiceItems + ", invoiceTotal=" + invoiceTotal + "]";
+        return "Invoice{" +
+                "invoiceId=" + invoiceId +
+                ", createdTime=" + createdTime +
+                ", modifiedTime=" + modifiedTime +
+                ", buyer=" + buyer +
+                ", invoiceItems=" + invoiceItems +
+                ", invoiceTotal=" + invoiceTotal +
+                '}';
     }
 
     @PrePersist

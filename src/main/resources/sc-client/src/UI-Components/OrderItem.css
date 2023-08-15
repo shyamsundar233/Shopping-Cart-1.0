@@ -1,0 +1,33 @@
+.outer-parent-1 {
+  border: 1px solid black;
+  border-radius: 4px;
+  height: 300px;
+}
+
+.header-content-1 {
+  border: solid black;
+  height: 75px;
+  display: flex;
+  background-color: #d8d9da;
+}
+
+.body-content-1 {
+  border: solid black;
+  height: 150px;
+}
+
+.footer-content-1 {
+  border: solid black;
+  height: 75px;
+}
+
+.header-left-content-1 {
+  display: flex;
+}
+
+.pad-10 {
+  padding: 10px;
+}
+
+.header-right-content-1 {
+}
