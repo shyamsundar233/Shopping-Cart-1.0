@@ -7,20 +7,22 @@ public class InvoiceItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int invPrdId;
-    private int prodId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "prodId", referencedColumnName = "prodId")
+    private Product product;
     private int prodQuantity;
-    private int prodPrice;
-    private int prodAmount;
+    private double prodPrice;
+    private double prodAmount;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "invoiceId", referencedColumnName = "invoiceId")
     private Invoice invoice;
 
-    public int getProdId() {
-        return prodId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProdId(int prodId) {
-        this.prodId = prodId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getProdQuantity() {
@@ -31,19 +33,19 @@ public class InvoiceItem {
         this.prodQuantity = prodQuantity;
     }
 
-    public int getProdPrice() {
+    public double getProdPrice() {
         return prodPrice;
     }
 
-    public void setProdPrice(int prodPrice) {
+    public void setProdPrice(double prodPrice) {
         this.prodPrice = prodPrice;
     }
 
-    public int getProdAmount() {
+    public double getProdAmount() {
         return prodAmount;
     }
 
-    public void setProdAmount(int prodAmount) {
+    public void setProdAmount(double prodAmount) {
         this.prodAmount = prodAmount;
     }
 
@@ -59,7 +61,7 @@ public class InvoiceItem {
     public String toString() {
         return "InvoiceItem{" +
                 "invPrdId=" + invPrdId +
-                ", prodId=" + prodId +
+                ", product=" + product +
                 ", prodQuantity=" + prodQuantity +
                 ", prodPrice=" + prodPrice +
                 ", prodAmount=" + prodAmount +

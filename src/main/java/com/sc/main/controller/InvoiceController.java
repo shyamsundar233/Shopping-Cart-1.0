@@ -1,7 +1,11 @@
 package com.sc.main.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.sc.main.POJO.SalesItem;
+import com.sc.main.utils.ProductUtil;
+import com.sc.main.utils.PurchaseUtil;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -67,10 +71,22 @@ public class InvoiceController {
         JSONObject response = new JSONObject();
         Invoice invoice = sales.getInvoice();
         String invoiceResponse = invoiceService.saveInvoice(invoice);
-        List<InvoiceItem> invoiceItems = sales.getInvoiceItem();
+        List<SalesItem> salesItemList = sales.getSalesItems();
+        List<InvoiceItem> invoiceItems = new ArrayList<InvoiceItem>();
+        for (SalesItem salesItem : salesItemList) {
+            InvoiceItem invoiceItem = new InvoiceItem();
+            Product product = ProductUtil.getProductById(salesItem.getProdId());
+            Purchase purchase = PurchaseUtil.getPurchaseForProd(product);
+            invoiceItem.setProduct(product);
+            invoiceItem.setProdQuantity(salesItem.getProdQty());
+            invoiceItem.setProdPrice(purchase.getProdPrice());
+            double prodAmount = salesItem.getProdQty() * purchase.getProdPrice();
+            invoiceItem.setProdAmount(prodAmount);
+            invoiceItems.add(invoiceItem);
+        }
         Invoice lastInvoice = invoiceService.getLastInvoice();
         for (InvoiceItem invoiceItem : invoiceItems) {
-            updateProdQty(invoiceItem.getProdId(), invoiceItem.getProdQuantity());
+            updateProdQty(invoiceItem.getProduct().getProdId(), invoiceItem.getProdQuantity());
             invoiceItem.setInvoice(lastInvoice);
             invoiceItemService.saveInvoiceItem(invoiceItem);
         }

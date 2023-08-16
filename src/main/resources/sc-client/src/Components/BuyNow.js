@@ -29,16 +29,14 @@ const constructInvoiceJson = (prodList, orderTotal) => {
     },
     invoiceTotal: orderTotal,
   };
-  invoiceJson.invoiceItem = [];
+  invoiceJson.salesItems = [];
   for (let index = 0; index < prodList.length; index++) {
     let prod = prodList[index];
     let prodObj = {
       prodId: prod.prodId,
-      prodQuantity: prod.quantity,
-      prodPrice: prod.prodPrice,
-      prodAmount: prod.quantity * prod.prodPrice,
+      prodQty: prod.quantity,
     };
-    invoiceJson.invoiceItem.push(prodObj);
+    invoiceJson.salesItems.push(prodObj);
   }
   return invoiceJson;
 };
