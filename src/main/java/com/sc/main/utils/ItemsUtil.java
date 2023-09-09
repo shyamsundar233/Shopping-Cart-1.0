@@ -15,20 +15,29 @@ public class ItemsUtil {
     private static ProductService productService;
 
     @Autowired
+    public ItemsUtil(ProductService productService, PurchaseService purchaseService) {
+        setProductService(productService);
+        setPurchaseService(purchaseService);
+    }
+
     public static void setProductService(ProductService productService) {
         ItemsUtil.productService = productService;
     }
 
-    @Autowired
     public static void setPurchaseService(PurchaseService purchaseService) {
         ItemsUtil.purchaseService = purchaseService;
     }
 
-    public static Item getItemByProdId(int prodId){
+    public static Item getItemByProdId(int prodId) {
         Product product = productService.getProductById(prodId);
         Purchase purchase = purchaseService.getPurchaseForProduct(product);
-        Item item = new Item(product.getProdId(), product.getProdName(), product.getProdDesc(), product.getProdTags(),
-                product.getProdImage(), purchase.getProdPrice(), purchase.getProdQuantity());
-        return item;
+        if (product != null && purchase != null) {
+            Item item = new Item(product.getProdId(), product.getProdName(), product.getProdDesc(),
+                    product.getProdTags(),
+                    product.getProdImage(), purchase.getProdPrice(), purchase.getProdQuantity());
+            return item;
+        } else {
+            return null;
+        }
     }
 }

@@ -70,11 +70,14 @@ public class ItemController {
     }
 
     @GetMapping("/recentItems")
-    public JSONArray recentItems(){
+    public JSONArray recentItems() {
         JSONArray response = new JSONArray();
         Set<Integer> prodIds = RecentItemsUtil.getRecentItemsToSerialize();
-        for(int prodId : prodIds){
-            response.add(getItemByProdId(prodId).get("item"));
+        for (int prodId : prodIds) {
+            Item item = ItemsUtil.getItemByProdId(prodId);
+            if (item != null) {
+                response.add(item);
+            }
         }
         return response;
     }
