@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { MDBBtn } from "mdb-react-ui-kit";
 import "./OrderItem.css";
+import { Link } from "react-router-dom";
 
 const OrderItem = ({ orderId, orderDate, orderTotal, buyerName, items }) => {
   // const [orderId, setOrderId] = useState(orderId);
@@ -37,7 +38,11 @@ const OrderItem = ({ orderId, orderDate, orderTotal, buyerName, items }) => {
               <img src={item.prodImage} className="prod-image-order-1" />
             </div>
             <div className="prod-details-order">
-              <p className="prod-name-order">{item.prodName}</p>
+              <p className="prod-name-order">
+                <Link to={`/detail/${item.prodId}`}>
+                  <b>{item.prodName}</b>
+                </Link>
+              </p>
               <p className="prod-name-order">
                 $ {item.prodPrice}&nbsp;&nbsp; | &nbsp;&nbsp;Qty: {item.prodQty}
               </p>

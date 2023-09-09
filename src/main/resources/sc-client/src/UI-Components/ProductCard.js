@@ -121,6 +121,7 @@ const ProductCard = ({
                       color="primary"
                       size="sm"
                       className="mt-2"
+                      onClick={() => handleProdQty(prodId, true)}
                       style={{ color: "#512B81", borderColor: "#512B81" }}
                     >
                       Add to wish list

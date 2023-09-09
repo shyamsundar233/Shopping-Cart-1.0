@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Orders.css";
 import OrderItem from "../UI-Components/OrderItem";
-import axios, { Axios } from "axios";
+import axios from "axios";
 
 const months = [
   "January",
@@ -71,28 +71,31 @@ const Orders = () => {
   }, []);
 
   return (
-    <div className="orders-container">
-      <div className="orders-outer-par">
-        <div className="order-title-container">
-          <div className="orders-title">Your Orders</div>
-          <input
-            type="search"
-            placeholder="Search your orders"
-            className="search-orders-input"
-          />
-        </div>
-        <div>
-          {ordersList.map((order, index) => (
-            <div className="orders-list-pos">
-              <OrderItem
-                orderId={order.orderId}
-                orderDate={order.createdDate}
-                buyerName={order.buyerName}
-                items={order.items}
-                orderTotal={order.orderTotal}
-              />
-            </div>
-          ))}
+    <div>
+      <div className="orders-header">
+        <div className="orders-title">Your Orders</div>
+        <input
+          type="search"
+          placeholder="Search your orders"
+          className="search-orders-input"
+        />
+      </div>
+      <div className="orders-container">
+        <div className="orders-outer-par">
+          <div className="order-title-container"></div>
+          <div>
+            {ordersList.map((order, index) => (
+              <div className="orders-list-pos">
+                <OrderItem
+                  orderId={order.orderId}
+                  orderDate={order.createdDate}
+                  buyerName={order.buyerName}
+                  items={order.items}
+                  orderTotal={order.orderTotal}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

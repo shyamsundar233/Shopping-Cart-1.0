@@ -22,7 +22,7 @@ const Title = () => {
         <a href="/orders" className="title-options">
           Orders & Returns
         </a>
-        <a href="" className="title-options">
+        <a href="/cart" className="title-options">
           Cart
         </a>
       </div>

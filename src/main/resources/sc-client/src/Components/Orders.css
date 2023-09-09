@@ -1,8 +1,7 @@
 .orders-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 150px;
+  margin-top: 50px;
+  margin-left: 100px;
 }
 
 .orders-outer-par {
@@ -15,7 +14,14 @@
 .search-orders-input {
   height: 25px;
   width: 200px;
-  margin-left: 250px;
+  position: absolute;
+  right: 75px;
+  top: 125px;
+}
+
+.orders-header {
+  margin-top: 100px;
+  margin-left: 100px;
 }
 
 .orders-title {
@@ -24,5 +30,6 @@
 }
 
 .orders-list-pos {
+  width: 800px;
   padding: 5px;
 }

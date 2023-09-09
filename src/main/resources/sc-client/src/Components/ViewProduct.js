@@ -24,7 +24,6 @@ const style = {
   borderRadius: "5px",
   boxShadow: 24,
   p: 4,
-  width: "500px",
 };
 
 let quantityList = [];
@@ -40,7 +39,7 @@ const ViewProduct = (props) => {
       }
     });
   }, []);
-  const handleProdQty = (prodId) => {
+  const handleProdQty = (prodId, addToWishList) => {
     setOpenModal(true);
     let prodQty = prodList.find((prod) => prod.prodId === prodId).prodQuantity;
     quantityList = [];
@@ -49,16 +48,32 @@ const ViewProduct = (props) => {
         <Button
           variant="contained"
           sx={{ margin: "5px" }}
-          onClick={(e) => buyNowCallback(prodId, itr + 1, prodList)}
+          onClick={(e) =>
+            buyNowCallback(prodId, itr + 1, prodList, addToWishList)
+          }
         >
           {itr + 1}
         </Button>
       );
     }
   };
-  const buyNowCallback = (prodId, prodQty) => {
-    let prodIdJson = prodListJson(prodId, prodQty, prodList);
-    nav("/buyNow", { state: { prodList: prodIdJson } });
+  const buyNowCallback = (prodId, prodQty, prodList, addToWishList) => {
+    if (addToWishList) {
+      let data = {
+        product: {
+          prodId: prodId,
+        },
+        itemQty: prodQty,
+      };
+      axios.post("http://localhost:8081/api/cart", data).then((resp) => {
+        console.log(resp);
+        nav("/cart");
+      });
+    } else {
+      let prodIdJson = prodListJson(prodId, prodQty, prodList);
+      debugger;
+      nav("/buyNow", { state: { prodList: prodIdJson } });
+    }
   };
   const handleClose = () => {
     setOpenModal(false);

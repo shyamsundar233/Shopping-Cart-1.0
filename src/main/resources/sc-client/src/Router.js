@@ -5,7 +5,6 @@ import AddProduct from "./Components/AddProduct";
 import ListProduct from "./Components/ListProduct";
 import AddPurchase from "./Components/AddPurchase";
 import ListPurchase from "./Components/ListPurchase";
-import Test from "./Components/Test";
 import Admin from "./Components/Admin";
 import BuyNow from "./Components/BuyNow";
 import PurchaseSuccess from "./Components/PurchaseSuccess";
@@ -13,6 +12,7 @@ import LoginComponent from "./Components/LoginComponent";
 import ItemDetailView from "./Components/ItemDetailView";
 import Home from "./Components/Home";
 import Orders from "./Components/Orders";
+import Cart from "./Components/Cart";
 
 const Router = () => {
   return (
@@ -22,6 +22,7 @@ const Router = () => {
           <Route index element={<Home />} />
           <Route path="detail/:itemId" element={<ItemDetailView />} />
           <Route path="orders" element={<Orders />} />
+          <Route path="cart" element={<Cart />} />
         </Route>
       </Routes>
       <Routes>

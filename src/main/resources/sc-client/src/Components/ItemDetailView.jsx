@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./ItemDetailView.css";
 import { MDBIcon, MDBBtn } from "mdb-react-ui-kit";
 import ProductBox from "../UI-Components/ProductBox";
@@ -63,7 +63,7 @@ const ItemDetailView = () => {
     <div>
       <div className="detail-view-whole">
         <div>
-          <img className="prod-img-1-detail" src={itemImage} />
+          <img alt="Error" className="prod-img-1-detail" src={itemImage} />
         </div>
         <div className="item-name">
           <h4>
