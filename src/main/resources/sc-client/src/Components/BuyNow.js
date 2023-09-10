@@ -46,6 +46,9 @@ const BuyNow = () => {
   const [openAddress, setOpenAddress] = useState(false);
   const [openPayment, setOpenPayment] = useState(false);
   const [orderTotal, setOrderTotal] = useState(0);
+  const [itemsFlag, setItemsFlag] = useState(false);
+  const [addressFlag, setAddressFlag] = useState(false);
+  const [paymentFlag, setPaymentFlag] = useState(false);
   const loc = useLocation();
   const nav = useNavigate();
   useEffect(() => {
@@ -64,16 +67,48 @@ const BuyNow = () => {
       setOrderTotal(total);
     });
   }, [prodList]);
+  const handleItemsClick = () => {
+    if (!itemsFlag) {
+      alert("Confirm items");
+      return false;
+    }
+    setOpenItems(!openItems);
+  };
+  const handleAddressClick = () => {
+    if (!itemsFlag || !addressFlag) {
+      let message = !itemsFlag ? "Confirm items" : "Confirm address";
+      alert(message);
+      return false;
+    }
+    setOpenAddress(!openAddress);
+  };
+  const handlePaymentClick = () => {
+    if (!itemsFlag || !addressFlag || !paymentFlag) {
+      let message = !itemsFlag
+        ? "Confirm items"
+        : !addressFlag
+        ? "Confirm address"
+        : !paymentFlag
+        ? "Confirm payment"
+        : null;
+      alert(message);
+      return false;
+    }
+    setOpenPayment(!openPayment);
+  };
   const handleConfirmItems = () => {
     setOpenItems(false);
     setOpenAddress(true);
+    setItemsFlag(true);
   };
   const handleConfirmAddress = () => {
     setOpenAddress(false);
     setOpenPayment(true);
+    setAddressFlag(true);
   };
   const handlePayment = () => {
     setOpenPayment(false);
+    setPaymentFlag(true);
   };
   const quantityDropdown = (prodId, prodQty, selectedQty) => {
     let arr = Array.from({ length: prodQty }, (_, index) => index + 1);
@@ -101,6 +136,10 @@ const BuyNow = () => {
     setProdList(tempProdList);
   };
   const saveInvoice = () => {
+    if (!itemsFlag || !addressFlag || !paymentFlag) {
+      alert("Confirm all the mandatory fields");
+      return false;
+    }
     let data = constructInvoiceJson(prodList, orderTotal);
     axios.post("http://localhost:8081/api/saveInvoice", data).then((resp) => {
       nav("/invoice/success");
@@ -118,7 +157,7 @@ const BuyNow = () => {
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"
-              onClick={() => setOpenItems(!openItems)}
+              onClick={handleItemsClick}
             >
               <Typography>Items</Typography>
             </AccordionSummary>
@@ -144,9 +183,11 @@ const BuyNow = () => {
                   </tr>
                 ))}
               </table>
-              <Button variant="outlined" onClick={handleConfirmItems}>
-                Confirm
-              </Button>
+              {!itemsFlag ? (
+                <Button variant="outlined" onClick={handleConfirmItems}>
+                  Confirm
+                </Button>
+              ) : null}
             </AccordionDetails>
           </Accordion>
           <br />
@@ -155,7 +196,7 @@ const BuyNow = () => {
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"
-              onClick={() => setOpenAddress(!openAddress)}
+              onClick={handleAddressClick}
             >
               <Typography>Address & delivery</Typography>
             </AccordionSummary>
@@ -169,9 +210,11 @@ const BuyNow = () => {
               +91-6374412583
               <br />
               <br />
-              <Button variant="outlined" onClick={handleConfirmAddress}>
-                Confirm
-              </Button>
+              {!addressFlag ? (
+                <Button variant="outlined" onClick={handleConfirmAddress}>
+                  Confirm
+                </Button>
+              ) : null}
             </AccordionDetails>
           </Accordion>
           <br />
@@ -180,7 +223,7 @@ const BuyNow = () => {
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"
-              onClick={() => setOpenPayment(!openPayment)}
+              onClick={handlePaymentClick}
             >
               <Typography>Payment method</Typography>
             </AccordionSummary>
@@ -211,9 +254,11 @@ const BuyNow = () => {
               </FormControl>
               <br />
               <br />
-              <Button variant="outlined" onClick={handlePayment}>
-                Confirm
-              </Button>
+              {!paymentFlag ? (
+                <Button variant="outlined" onClick={handlePayment}>
+                  Confirm
+                </Button>
+              ) : null}
             </AccordionDetails>
           </Accordion>
         </div>
