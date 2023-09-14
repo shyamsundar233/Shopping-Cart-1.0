@@ -1,0 +1,56 @@
+.h-div {
+  position: fixed;
+  background-color: #1876d1;
+  height: 70px;
+  width: 100%;
+  top: 0;
+  z-index: 1;
+}
+
+.h3-title {
+  text-align: center;
+  padding: 16px;
+  color: white;
+}
+.t-div-1 {
+  position: fixed;
+  right: 170px;
+  top: 150px;
+  height: 0px;
+}
+
+.b-div {
+  position: absolute;
+  top: 150px;
+  left: 120px;
+}
+
+th,
+td {
+  padding: 10px;
+}
+
+.manage-add-btn {
+  height: 30px;
+  width: 130px;
+  font-size: 11px !important;
+  margin-left: 60% !important;
+}
+
+.manage-add-btn:hover {
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+.buyer-list-cust {
+  padding: 5px;
+  width: 100%;
+  display: flex;
+}
+
+.buyer-details {
+  width: 80%;
+}
+
+.close-modal-btn-cust {
+}

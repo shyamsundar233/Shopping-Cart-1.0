@@ -1,0 +1,102 @@
+.detail-view-whole {
+  margin-left: 120px;
+  margin-right: 120px;
+  margin-top: 90px;
+  color: black;
+}
+.prod-img-1-detail {
+  position: absolute;
+  top: 190px;
+  width: 197px;
+  height: 197px;
+}
+
+.item-name {
+  width: 600px;
+  margin-left: 235px;
+  position: absolute;
+  top: 200px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+b {
+  font-weight: 1000 !important;
+}
+
+.res-1 {
+  font-size: 20px;
+}
+
+.desc-item-detail-1 {
+  position: absolute;
+  margin-top: 300px;
+  margin-left: 50px;
+  width: 600px;
+}
+
+.right-box-border {
+  position: absolute;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  width: 300px;
+  height: 400px;
+  top: 160px;
+  right: 155px;
+}
+
+.item-price-detail {
+  font-weight: bolder;
+  font-size: 25px;
+  position: absolute;
+  left: 15%;
+  top: 10%;
+}
+
+.disc-price-detail {
+  color: red;
+  text-decoration: line-through;
+  font-weight: bolder;
+  font-size: 20px;
+  position: absolute;
+  top: 11%;
+  left: 42%;
+}
+
+.delivery-stat-1 {
+  color: green;
+  font-weight: bolder;
+  font-size: 20px;
+  position: absolute;
+  top: 170px;
+  left: 15%;
+}
+
+.delivery-date-1 {
+  font-size: 15px;
+  position: absolute;
+  top: 195px;
+  left: 15%;
+}
+
+.buy-now-btn-1 {
+  position: absolute;
+  left: 15px;
+  top: 250px;
+  width: 270px;
+}
+
+.prod-box-detail-1 {
+  display: flex;
+  align-items: center;
+  margin-top: 500px;
+  margin-left: 50px;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.item-qty-detail-1 {
+  position: absolute;
+  top: 29%;
+  left: 15%;
+}

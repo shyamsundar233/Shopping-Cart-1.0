@@ -1,0 +1,35 @@
+.orders-container {
+  display: flex;
+  margin-top: 50px;
+  margin-left: 100px;
+}
+
+.orders-outer-par {
+}
+
+.order-title-container {
+  display: flex;
+}
+
+.search-orders-input {
+  height: 25px;
+  width: 200px;
+  position: absolute;
+  right: 75px;
+  top: 125px;
+}
+
+.orders-header {
+  margin-top: 100px;
+  margin-left: 100px;
+}
+
+.orders-title {
+  font-size: 40px;
+  font-weight: 1000;
+}
+
+.orders-list-pos {
+  width: 800px;
+  padding: 5px;
+}

@@ -1,0 +1,121 @@
+.title-outer-div-1 {
+  background-color: #512b81;
+  color: white;
+  height: 70px;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.title-logo-par {
+  display: flex;
+  width: 500px;
+  height: 100%;
+  margin-left: 25px;
+}
+.title-logo-1 {
+  min-width: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-logo {
+  width: 70%;
+  height: 100%;
+  object-fit: contain;
+  overflow: hidden;
+}
+
+.title-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+  font-family: "Raleway";
+  font-size: 30px;
+  font-weight: 1000;
+}
+.spl-link-title {
+  background-image: linear-gradient(to right, #54b3d6, #54b3d6 50%, white 50%);
+  background-size: 200% 100%;
+  background-position: -100%;
+  display: inline-block;
+  padding: 1px 0;
+  position: relative;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.spl-link-title:before {
+  content: "";
+  background: #54b3d6;
+  display: block;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+.spl-link-title:hover {
+  background-position: 0;
+}
+
+.spl-link-title:hover::before {
+  width: 100%;
+}
+
+.title-options-outer-div-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 50px;
+  font-weight: 500;
+}
+
+/* .title-options{
+  padding: 10px;
+} */
+
+/* .title-options:hover{
+  border: 1px solid white;
+  border-radius: 4px;
+  color: white !important;
+} */
+
+.title-options {
+  background-image: linear-gradient(to right, #54b3d6, #54b3d6 50%, white 50%);
+  background-size: 200% 100%;
+  background-position: -100%;
+  display: inline-block;
+  padding: 10px;
+  position: relative;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.title-options:before {
+  content: "";
+  background: #54b3d6;
+  display: block;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+.title-options:hover {
+  background-position: 0;
+}
+
+.title-options:hover::before {
+  width: 100%;
+}
