@@ -102,7 +102,7 @@ const Cart = () => {
               style={{ backgroundColor: "#512B81", width: "100%" }}
               onClick={handleProceedToBuy}
             >
-              Track Package
+              Proceed To Checkout
             </MDBBtn>
           </div>
         </div>

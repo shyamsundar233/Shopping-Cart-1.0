@@ -19,12 +19,13 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "./BuyNow.css";
+import CustomModal from "../UI-Components/CustomModal";
 
-const constructInvoiceJson = (prodList, orderTotal) => {
+const constructInvoiceJson = (prodList, buyerId, orderTotal) => {
   let invoiceJson = {};
   invoiceJson.invoice = {
     buyer: {
-      buyerId: 1,
+      buyerId: buyerId,
     },
     invoiceTotal: orderTotal,
   };
@@ -49,6 +50,9 @@ const BuyNow = () => {
   const [itemsFlag, setItemsFlag] = useState(false);
   const [addressFlag, setAddressFlag] = useState(false);
   const [paymentFlag, setPaymentFlag] = useState(false);
+  const [buyersList, setBuyersList] = useState([]);
+  const [buyer, setBuyer] = useState([]);
+  const [openAddressModal, setOpenAddressModal] = useState(false);
   const loc = useLocation();
   const nav = useNavigate();
   useEffect(() => {
@@ -58,6 +62,10 @@ const BuyNow = () => {
     tempProdList.forEach((prod) => {
       total += prod.prodPrice * prod.quantity;
       setOrderTotal(total);
+    });
+    axios.get("http://localhost:8081/api/buyer").then((resp) => {
+      setBuyersList(resp.data.allBuyers);
+      setBuyer(resp.data.allBuyers[0]);
     });
   }, []);
   useEffect(() => {
@@ -136,14 +144,29 @@ const BuyNow = () => {
     setProdList(tempProdList);
   };
   const saveInvoice = () => {
+    debugger;
     if (!itemsFlag || !addressFlag || !paymentFlag) {
       alert("Confirm all the mandatory fields");
       return false;
     }
-    let data = constructInvoiceJson(prodList, orderTotal);
+    let buyerId = buyer.buyerId;
+    let data = constructInvoiceJson(prodList, buyerId, orderTotal);
     axios.post("http://localhost:8081/api/saveInvoice", data).then((resp) => {
       nav("/invoice/success");
     });
+  };
+  const handleManageAddress = (event) => {
+    setOpenAddressModal(!openAddressModal);
+    event.stopPropagation();
+  };
+  const closeModalCallback = () => {
+    setOpenAddressModal(false);
+  };
+  const handleAddressSelect = (buyerId) => {
+    debugger;
+    let tempBuyerList = [...buyersList];
+    let selectedBuyer = tempBuyerList.find((elem) => elem.buyerId === buyerId);
+    setBuyer(selectedBuyer);
   };
   if (prodList && prodList.length > 0) {
     return (
@@ -199,15 +222,19 @@ const BuyNow = () => {
               onClick={handleAddressClick}
             >
               <Typography>Address & delivery</Typography>
+              {openAddress ? (
+                <Button
+                  className="manage-add-btn"
+                  onClick={(e) => handleManageAddress(e)}
+                >
+                  Manage Address
+                </Button>
+              ) : null}
             </AccordionSummary>
             <AccordionDetails>
-              Shyam sundar <br />
-              No.3, Flat B1, Mirra Apartments 3 Hostel Street,
-              <br />
-              Urapakkam <br />
-              Urapakkam <br />
-              CHENNAI, TAMIL NADU 603210 <br />
-              +91-6374412583
+              {buyer.buyerName} <br />
+              {buyer.buyerAddress} <br />
+              +91-{buyer.buyerPhone}
               <br />
               <br />
               {!addressFlag ? (
@@ -299,6 +326,39 @@ const BuyNow = () => {
             </CardActions>
           </Card>
         </div>
+        <CustomModal
+          open={openAddressModal}
+          header={
+            <div>
+              <Typography>
+                <b>Address & delivery</b>
+              </Typography>
+            </div>
+          }
+          content={
+            <div>
+              {buyersList.map((buyer) => (
+                <div className="buyer-list-cust">
+                  <div className="buyer-details">
+                    {buyer.buyerName}
+                    <br />
+                    {buyer.buyerPhone}
+                    <br />
+                    {buyer.buyerAddress}
+                    <br />
+                  </div>
+                  <div className="close-modal-btn-cust">
+                    <a onClick={() => handleAddressSelect(buyer.buyerId)}>
+                      <Button>Select</Button>
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          }
+          footer={<div></div>}
+          closeModal={closeModalCallback}
+        />
       </div>
     );
   }
