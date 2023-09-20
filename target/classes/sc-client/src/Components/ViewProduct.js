@@ -5,6 +5,7 @@ import NavButton from "../UI-Components/NavButton";
 import { useNavigate } from "react-router-dom";
 import { Modal, Backdrop, Fade, Box, Typography, Button } from "@mui/material";
 import "./ViewProduct.css";
+import { useSelector } from "react-redux";
 
 const prodListJson = (prodId, prodQty, prodList) => {
   let prodRecord = prodList.find((prod) => prod.prodId === prodId);
@@ -29,16 +30,9 @@ const style = {
 let quantityList = [];
 
 const ViewProduct = (props) => {
-  const [prodList, setProdList] = useState(props.prodList);
+  const prodList = useSelector((state) => state.item.items);  
   const [openModal, setOpenModal] = useState(false);
-  const nav = useNavigate();
-  useEffect(() => {
-    axios.get("http://localhost:8081/api/items").then((resp) => {
-      if (typeof resp.data !== "string") {
-        setProdList(resp.data);
-      }
-    });
-  }, []);
+  const nav = useNavigate();  
   const handleProdQty = (prodId, addToWishList) => {
     setOpenModal(true);
     let prodQty = prodList.find((prod) => prod.prodId === prodId).prodQuantity;
